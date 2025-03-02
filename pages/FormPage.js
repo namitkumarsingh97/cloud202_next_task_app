@@ -404,7 +404,7 @@ export default function ConfigurationPage() {
                     !basicConfigFormData.appName ||
                     !basicConfigFormData.description
                   ) {
-                    alert("All fields are required!");
+                    toast.warn("All fields are required!");
                     return;
                   }
                   setActiveTab("RAG");
@@ -652,7 +652,7 @@ export default function ConfigurationPage() {
                     !rAGFormData.chunking ||
                     !rAGFormData.vectorDB
                   ) {
-                    alert("All fields are required!");
+                    toast.warn("All fields are required!");
                     return;
                   }
                   setActiveTab("Workflows");
