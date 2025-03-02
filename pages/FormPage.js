@@ -4,6 +4,7 @@ import { Button } from "@/src/components/ui/button";
 import { Input } from "@/src/components/ui/input";
 import { Textarea } from "@/src/components/ui/textarea";
 import Sidebar from "@/src/components/ui/sidebar";
+import { toast } from "react-toastify";
 
 export default function ConfigurationPage() {
   const [activeTab, setActiveTab] = useState("Basic Config");
@@ -45,7 +46,7 @@ export default function ConfigurationPage() {
 
   const handleAddConfiguration = () => {
     if (!rAGFormData.knowledgeBaseName) {
-      alert("Knowledge Base Name is required!");
+      toast.warn("Knowledge Base Name is required!");
       return;
     }
 
@@ -77,7 +78,7 @@ export default function ConfigurationPage() {
 
   const handleSubmit = async () => {
     if (!basicConfigFormData.appName || !basicConfigFormData.description) {
-      alert("All fields are required!");
+      toast.warn("All fields are required!");
       return;
     }
 
@@ -90,7 +91,7 @@ export default function ConfigurationPage() {
       !rAGFormData.chunking ||
       !rAGFormData.vectorDB
     ) {
-      alert("All fields are required!");
+      toast.warn("All fields are required!");
       return;
     }
 
@@ -106,7 +107,7 @@ export default function ConfigurationPage() {
       const data = await response.json();
 
       if (response.ok) {
-        alert("Basic Configuration submitted successfully!");
+        toast.success("Basic Configuration submitted successfully!");
         setBasicConfigFormData({ appName: "", description: "" });
       } else {
         alert(`Error: ${data.message}`);
@@ -123,7 +124,7 @@ export default function ConfigurationPage() {
       const RAGdata = await RAGresponse.json();
 
       if (RAGresponse.ok) {
-        alert("RAG Configuration submitted successfully!");
+        toast.success("RAG Configuration submitted successfully!");
         setRAGFormData({
           knowledgeBaseName: "",
           description: "",
@@ -140,7 +141,7 @@ export default function ConfigurationPage() {
       handleClear();
     } catch (error) {
       console.error("Error submitting data:", error);
-      alert("Something went wrong. Please try again.");
+      toast.error("Something went wrong. Please try again.");
     }
   };
 
